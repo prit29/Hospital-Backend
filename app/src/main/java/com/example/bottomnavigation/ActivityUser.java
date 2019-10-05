@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.bottomnavigation.Adapters.Adapter2;
 import com.example.bottomnavigation.pojo_classes.Medicine;
+import com.example.bottomnavigation.pojo_classes.patients;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,46 +15,52 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.TextView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ActivityUser extends AppCompatActivity {
 
-    RecyclerView r1;
+    RecyclerView mRecycler;
     Adapter2 adapter;
     ArrayList<Medicine> medical;
+    TextView mName,mContact;
+    patients userprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        r1 = findViewById(R.id.r1);
-        r1.setLayoutManager(new LinearLayoutManager(this));
-
-        Intent intent = getIntent();
-        String data = intent.getStringExtra("array");
+        String user = getIntent().getStringExtra("User");
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
-        medical = new ArrayList<>();
-        try{
-            medical = gson.fromJson(data,type);
-            adapter=new Adapter2(medical);
-            r1.setAdapter(adapter);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        userprofile = gson.fromJson(user,patients.class);
+
+        mName = findViewById(R.id.name);
+        mContact = findViewById(R.id.contact);
+
+        mName.setText(userprofile.getName());
+        mContact.setText(userprofile.getContact());
+
+        mRecycler = findViewById(R.id.recyclerMedicine);
+        mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        //TODO
+        //Get Data From Firebase For UserID about medicins and create an arraylist<patients> and pass to recyclerview adapter
+
+        Adapter2 adapter2 = new Adapter2(medicineData);
+        mRecycler.setAdapter(adapter2);
+
+        FloatingActionButton fab = findViewById(R.id.addmedicine);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityUser.this,ActivityMedicine.class);
+                intent.putExtra("UserID",userprofile.getId());
                 startActivity(intent);
             }
         });
     }
-
 }

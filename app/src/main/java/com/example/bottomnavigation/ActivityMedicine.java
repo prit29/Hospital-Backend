@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.bottomnavigation.pojo_classes.Medicine;
 import com.google.gson.Gson;
@@ -17,14 +18,12 @@ import java.util.ArrayList;
 
 public class ActivityMedicine extends AppCompatActivity {
 
-    EditText e1;
+    EditText e1,days;
     CheckBox c1;
     CheckBox c2;
     CheckBox c3;
     Button b1;
-    Button b2;
-
-    ArrayList<Medicine> medical ;
+    TextView b2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class ActivityMedicine extends AppCompatActivity {
         c1 = findViewById(R.id.checkBox);
         c2 = findViewById(R.id.checkBox2);
         c3 = findViewById(R.id.checkBox3);
+        days = findViewById(R.id.days);
 
-        medical = new ArrayList<>();
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,8 +54,11 @@ public class ActivityMedicine extends AppCompatActivity {
                         b=1;
                 if(c3.isChecked())
                         c=1;
+                String medicine = e1.getText().toString();
+                String day = days.getText().toString();
 
-                medical.add(new Medicine(e1.getText().toString(),a,b,c));
+                //TODO
+                //add medicines to firebase
             }
         });
 
@@ -64,13 +66,8 @@ public class ActivityMedicine extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ActivityUser.class);
-
-                Gson gson = new Gson();
-                String data = gson.toJson(medical);
-                intent.putExtra("array",data);
                 startActivity(intent);
             }
         });
-
     }
 }
