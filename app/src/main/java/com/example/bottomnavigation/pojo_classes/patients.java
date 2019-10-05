@@ -8,37 +8,7 @@ public class patients {
     String name;
     String contact;
     String slot_index;
-    ArrayList<Medicine> medicines;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public patients(String id, String slot_date, String slot_index) {
-        this.id = id;
-        this.slot_date = slot_date;
-        this.slot_index = slot_index;
-        medicines = new ArrayList<>();
-
-        //TODO
-        // get name of user by it's id from firebase
-        // get contact
-    }
-
-    public patients() {
-    }
+    String Age;
 
     public String getId() {
         return id;
@@ -56,6 +26,22 @@ public class patients {
         this.slot_date = slot_date;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public String getSlot_index() {
         return slot_index;
     }
@@ -64,12 +50,20 @@ public class patients {
         this.slot_index = slot_index;
     }
 
-    public ArrayList<Medicine> getMedicines() {
-        return medicines;
+    public String getAge() {
+        return Age;
     }
 
-    public void setMedicines(ArrayList<Medicine> medicines) {
-        this.medicines = medicines;
+    public void setAge(String age) {
+        Age = age;
     }
 
+    public patients(String id, String slot_date, String name, String contact, String slot_index, String age) {
+        this.id = id;
+        this.slot_date = slot_date;
+        this.name = name;
+        this.contact = contact;
+        this.slot_index = slot_index;
+        Age = age;
+    }
 }

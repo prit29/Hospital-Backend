@@ -46,7 +46,7 @@ public class SlotBooking extends AppCompatActivity implements View.OnClickListen
         mContact = findViewById(R.id.contact);
         sharedPreferences = getSharedPreferences("Hospital",MODE_PRIVATE);
         String HospitalID = sharedPreferences.getString("HospitalID","Dummy");
-        mdatabase = FirebaseDatabase.getInstance().getReference("Hospitals").child(HospitalID).child("Offline");
+        mdatabase = FirebaseDatabase.getInstance().getReference("Hospitals").child(HospitalID);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +86,18 @@ public class SlotBooking extends AppCompatActivity implements View.OnClickListen
     
 
     private void updateDate(int year, int monthOfYear, int dayOfMonth) {
-        date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-        dt2=dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-        datestring = dayOfMonth + "_" + (monthOfYear + 1) + "_" + year;
+        if(dayOfMonth/10 ==0)
+        {
+            date.setText("0"+dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            dt2= "0"+dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+            datestring = "0"+ dayOfMonth + "_" + (monthOfYear + 1) + "_" + year;
+        }
+        else
+        {
+            date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            dt2= dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+            datestring = dayOfMonth + "_" + (monthOfYear + 1) + "_" + year;
+        }
     }
 
     @Override
@@ -131,11 +140,10 @@ public class SlotBooking extends AppCompatActivity implements View.OnClickListen
                 else
                 {
                     HashMap<String,String> mapp= new HashMap<>();
-                    mapp.put("User Id",mName.getText().toString());
+                    mapp.put("User Id","Booked By Doctor");
                     mdatabase.child(datestring).child(time).setValue(mapp).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-
                             startActivity(new Intent(SlotBooking.this,AllContent.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                             Toast.makeText(SlotBooking.this,"Booked Successfully",Toast.LENGTH_LONG).show();
                         }

@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Request"></activity>
         <activity android:name=".AllContent" />
+        <activity android:name=".SlotBooking"></activity>
         <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,14 +23,9 @@
             android:name=".ActivityMedicine"
             android:theme="@style/AppTheme.myback" />
         <activity android:name=".ActivityUser">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DoctorMain" />
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"

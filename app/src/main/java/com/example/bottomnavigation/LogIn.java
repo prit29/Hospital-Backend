@@ -18,6 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LogIn extends AppCompatActivity {
 
@@ -74,14 +79,30 @@ public class LogIn extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            //TODO
-                            //Get Hospital ID by email
-                            String HospitalId = "";
-                            SharedPreferences sharedPreferences = getSharedPreferences("Hospital",MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("HospitalID",HospitalId);
-                            editor.commit();
-                            startActivity(new Intent(LogIn.this,AllContent.class));
+                            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User-Hospitals").child(user.getUid());
+                            Toast.makeText(getApplicationContext(),user.getUid(),Toast.LENGTH_LONG).show();
+                            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    String HospitalId =String.valueOf(dataSnapshot.child("HospitalId").getValue());
+
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Hospital",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("HospitalID",HospitalId);
+                                    editor.commit();
+                                    startActivity(new Intent(LogIn.this,AllContent.class));
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+
                         } else {
                             Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }

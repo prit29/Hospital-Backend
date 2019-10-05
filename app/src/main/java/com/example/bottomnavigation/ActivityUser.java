@@ -50,9 +50,9 @@ public class ActivityUser extends AppCompatActivity {
         //TODO
         //Get Data From Firebase For UserID about medicins and create an arraylist<patients> and pass to recyclerview adapter
 
-        Adapter2 adapter2 = new Adapter2(medicineData);
+        /*Adapter2 adapter2 = new Adapter2(medicineData);
         mRecycler.setAdapter(adapter2);
-
+*/
         FloatingActionButton fab = findViewById(R.id.addmedicine);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

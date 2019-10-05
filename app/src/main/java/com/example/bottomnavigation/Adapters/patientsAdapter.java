@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bottomnavigation.ActivityMedicine;
 import com.example.bottomnavigation.ActivityUser;
 import com.example.bottomnavigation.R;
 import com.example.bottomnavigation.pojo_classes.patients;
@@ -40,22 +41,37 @@ public class patientsAdapter extends RecyclerView.Adapter<patientsAdapter.progVi
 
     @Override
     public void onBindViewHolder(@NonNull progViewHolder progViewHolder, int i) {
-        final patients user = data.get(i);
-        progViewHolder.mName.setText(user.getName());
-        progViewHolder.mNumber.setText(user.getContact());
-        String time = user.getSlot_date()+"\n"+user.getSlot_index();
-        progViewHolder.mTime.setText(time);
 
-        progViewHolder.mLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ActivityUser.class);
-                Gson gson = new Gson();
-                String patient = gson.toJson(user);
-                intent.putExtra("User",patient);
-                context.startActivity(intent);
-            }
-        });
+        final patients user = data.get(i);
+
+        if(!user.getContact().equals("0"))
+        {
+            progViewHolder.mName.setText(user.getName());
+            progViewHolder.mNumber.setText(user.getContact());
+            String time = user.getSlot_date()+"\n"+user.getSlot_index();
+            progViewHolder.mTime.setText(time);
+
+            progViewHolder.mLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ActivityMedicine.class);
+                    Gson gson = new Gson();
+                    String patient = gson.toJson(user);
+                    intent.putExtra("User",patient);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else
+        {
+            progViewHolder.mName.setText("Booked By Doctor");
+            progViewHolder.mNumber.setVisibility(View.GONE);
+
+            String time = user.getSlot_date()+"\n"+user.getSlot_index();
+            progViewHolder.mTime.setText(time);
+
+        }
+
     }
 
     @Override

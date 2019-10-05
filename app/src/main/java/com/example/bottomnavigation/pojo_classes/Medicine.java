@@ -3,16 +3,13 @@ package com.example.bottomnavigation.pojo_classes;
 public class Medicine {
 
     String medicine;
-    int a,b,c;
 
-    public Medicine() {
-    }
-
-    public Medicine(String medicine, int a, int b, int c) {
+    public Medicine(String medicine, int a, int b, int c, int days) {
         this.medicine = medicine;
         this.a = a;
         this.b = b;
         this.c = c;
+        this.days = days;
     }
 
     public String getMedicine() {
@@ -46,4 +43,16 @@ public class Medicine {
     public void setC(int c) {
         this.c = c;
     }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    int a,b,c;
+    int days;
+
 }
