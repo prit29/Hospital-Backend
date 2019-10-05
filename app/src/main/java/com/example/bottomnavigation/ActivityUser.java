@@ -3,13 +3,13 @@ package com.example.bottomnavigation;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.bottomnavigation.Adapters.Adapter2;
+import com.example.bottomnavigation.pojo_classes.Medicine;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +17,6 @@ import android.view.View;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityUser extends AppCompatActivity {
 

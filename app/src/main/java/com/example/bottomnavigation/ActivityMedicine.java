@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.bottomnavigation.pojo_classes.Medicine;
 import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ActivityMedicine extends AppCompatActivity {
