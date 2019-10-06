@@ -96,14 +96,14 @@ public class ActivityMedicine extends AppCompatActivity {
                 String json= gson.toJson(data);
                 HashMap<String,Object> mp= new HashMap<>();
                 mp.put("Medicines",json);
-                reference= FirebaseDatabase.getInstance().getReference("Hospitals").child(pref.getString("HospitalID","")+"/"+userprofile.getSlot_date()+"/"+userprofile.getSlot_index());
-                reference.updateChildren(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                DatabaseReference rrr= FirebaseDatabase.getInstance().getReference("Users").child(userprofile.getId());
+                rrr.updateChildren(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(),"Medicine Sended",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Medicine Sended",Toast.LENGTH_SHORT).show();
                     }
                 });
-
 
                 finish();
             }
