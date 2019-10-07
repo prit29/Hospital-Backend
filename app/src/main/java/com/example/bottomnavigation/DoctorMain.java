@@ -106,14 +106,6 @@ public class DoctorMain extends AppCompatActivity {
 
                 }
             });
-
-
-        }else {
-            mType.setText("All Cases");
-            //TODO
-            //Request For All Appointments FIrebase
         }
-
-
     }
 }

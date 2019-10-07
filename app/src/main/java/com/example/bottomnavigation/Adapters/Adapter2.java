@@ -12,27 +12,19 @@ import com.example.bottomnavigation.R;
 import com.example.bottomnavigation.pojo_classes.Medicine;
 
 import java.util.ArrayList;
-
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.progViewHolder> {
-
     private ArrayList<Medicine> data;
-
     public Adapter2(ArrayList<Medicine> data){
         this.data = data;
     }
-
     @NonNull
     @Override
     public progViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         LayoutInflater l1 = LayoutInflater.from(viewGroup.getContext());
         View view = l1.inflate(R.layout.layers3,viewGroup,false);
         final progViewHolder view2 = new progViewHolder(view);
-
-
-
         return view2;
     }
-
     @Override
     public void onBindViewHolder(@NonNull progViewHolder progViewHolder, int i) {
 
@@ -53,11 +45,6 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.progViewHolder> {
         }
     }
 
-    public  void removeItem(int position) {
-        data.remove(position);
-        notifyItemRemoved(position);
-    }
-
     public class progViewHolder extends RecyclerView.ViewHolder{
         TextView t1,t2,t3,t4;
         public progViewHolder(View itemView){
@@ -66,7 +53,6 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.progViewHolder> {
             t2 = itemView.findViewById(R.id.t2);
             t3 = itemView.findViewById(R.id.t3);
             t4 = itemView.findViewById(R.id.t4);
-
         }
     }
 }

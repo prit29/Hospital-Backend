@@ -64,7 +64,6 @@ public class ActivityMedicine extends AppCompatActivity {
         c3 = findViewById(R.id.checkBox3);
         days = findViewById(R.id.days);
 
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
